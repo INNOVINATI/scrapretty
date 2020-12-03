@@ -1,24 +1,43 @@
+import Vue from 'vue'
+
 export const state = () => {
   return {
-    snackbar: '',
+    snackbar: {
+      show: false,
+      text: ''
+    },
+    settings: {
+      showUploadNotice: true,
+    }
   }
 }
 
 export const actions = {
-  init({ dispatch }) {
+  init({ dispatch, commit }) {
+    let settings = JSON.parse(localStorage.getItem('settings'))
+    if (!!settings)
+      commit('loadSettings', settings)
+
     let hosts = JSON.parse(localStorage.getItem('hosts'))
     if (!!hosts)
       hosts.forEach(host => dispatch('hosts/loadHost', host))
   },
-  snackbar({ commit }, { msg }) {
-    commit('snackbar', msg)
+  changeSetting({ dispatch, commit }, {key, value}) {
+    commit('changeSetting', {key, value})
+    dispatch('saveSettings')
   },
+  saveSettings({ state }) {
+    localStorage.setItem('settings', JSON.stringify(state.settings))
+  }
 
 }
 
 export const mutations = {
-  snackbar(state, msg) {
-    state.application.snackbar = msg
+  loadSettings(state, settings) {
+    state.settings = settings
+  },
+  changeSetting(state, {key, value}) {
+    state.settings[key] = value
   }
 }
 

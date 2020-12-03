@@ -1,24 +1,16 @@
 <template>
   <v-card
     class="mx-auto"
-    max-width="344"
+    min-width="300"
   >
-    <v-img
-      src="https://icons-for-free.com/iconfiles/png/512/database+host+hosting+server+settings+share+icon-1320137028122777541.png"
-      width="50px"
-      class="mx-auto"
-    ></v-img>
+    <slot name="header"></slot>
 
-    <v-card-title>
-      {{ title }}
-    </v-card-title>
-
-    <v-card-subtitle>
-      {{ subtitle }}
-    </v-card-subtitle>
+    <v-card-subtitle v-for="(item, i) in contents" v-bind:key="i" v-html="item"></v-card-subtitle>
 
     <v-card-actions>
       <v-btn
+        v-for="(action, i) in actions"
+        v-bind:key="i"
         color="orange lighten-2"
         text
         @click="action.callback"
@@ -31,6 +23,8 @@
       <v-btn
         icon
         @click="show = !show"
+        :title="(show ? 'Hide' : 'Show') + ' details'"
+        v-if="details"
       >
         <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
       </v-btn>
@@ -39,9 +33,21 @@
     <v-expand-transition>
       <div v-show="show">
         <v-divider></v-divider>
-
-        <v-card-text>
-
+        <v-card-text align="center">
+          <v-chip
+            v-for="(item, i) in details"
+            v-bind:key="i"
+            class="ma-1"
+          >
+            <v-icon
+              v-if="item.hasOwnProperty('icon')"
+              left
+              small
+            >
+              {{ item.icon }}
+            </v-icon>
+            <span>{{ item.text }}</span>
+          </v-chip>
         </v-card-text>
       </div>
     </v-expand-transition>
@@ -52,13 +58,12 @@
 export default {
   name: "DashboardCard",
   props: {
-    image: {type: String, default: () => 'https://icons-for-free.com/iconfiles/png/512/database+host+hosting+server+settings+share+icon-1320137028122777541.png'},
-    title: String,
-    subtitle: String,
-    action: {
-      text: String,
-      callback: Function
-    }
+    contents: Array,
+    details: {
+      type: Array,
+      default: () => null
+    },
+    actions: Array
   },
   data: () => ({
     show: false,
