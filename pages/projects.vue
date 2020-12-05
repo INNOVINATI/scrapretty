@@ -34,8 +34,8 @@
 </template>
 
 <script>
-import ProjectCard from "@/components/ProjectCard";
-import DashboardCard from "@/components/DashboardCard";
+import ProjectCard from "@/components/Cards/ProjectCard";
+import DashboardCard from "@/components/Cards/DashboardCard";
 export default {
 name: "projects",
   components: {DashboardCard, ProjectCard},

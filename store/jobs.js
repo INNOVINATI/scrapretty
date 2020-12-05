@@ -4,6 +4,7 @@ export const state = () => {
   }
 }
 
+
 export const actions = {
   loadJobs({ rootState, state, commit }, host ) {
     if (state.list.length > 0)
@@ -29,7 +30,7 @@ export const mutations = {
   },
   flush(state, host) {
     if (host)
-      state.list = state.list.filter(x => x.host !== host.node_name)
+      state.list = state.list.filter(x => x.hostUrl !== host.url)
     else
       state.list = []
   }

@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import DashboardCard from "@/components/DashboardCard";
+import DashboardCard from "@/components/Cards/DashboardCard";
 export default {
   name: "HostCard",
   components: {DashboardCard},

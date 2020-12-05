@@ -36,6 +36,9 @@ export const mutations = {
   connect(state, host) {
     state.connected = host
   },
+  disconnect(state) {
+    state.connected = null
+  },
   addHost(state, host) {
     if (host.status === 'ok')
       state.list.unshift(host)
