@@ -18,6 +18,7 @@
           :key="i"
         >
           <NumberWidget
+            class="mx-auto"
             :title="stat.key"
             :value="stat.value"
           ></NumberWidget>
@@ -25,7 +26,7 @@
       </v-row>
       <v-row>
         <v-col cols="12" md="12">
-          <DonutChartWidget :data="chartData"></DonutChartWidget>
+          <DonutChartWidget :chartData="chartData"></DonutChartWidget>
         </v-col>
       </v-row>
     </v-col>
@@ -54,21 +55,26 @@ export default {
     projects() {
       return this.$store.state.projects.list
     },
+    jobs() {
+      return this.$store.state.jobs.list
+    },
     stats() {
       return [
-        {key: 'Hosts', value: this.$store.state.hosts.list.length},
-        {key: 'Projects', value: this.$store.state.projects.list.length},
-        {key: 'Jobs', value: this.$store.state.jobs.list.length},
+        {key: 'Hosts', value: this.hosts.length},
+        {key: 'Projects', value: this.projects.length},
+        {key: 'Jobs', value: this.jobs.length},
       ]
     },
     chartData() {
-      let datasets = [{data: []}]
+      let colors = []
+      let datasets = [{label: 'Jobs per Host', data: [], backgroundColor: []}]
       let labels = []
-      this.$store.state.hosts.list.forEach(host => {
+      for (let host of this.hosts) {
         labels.push(host.node_name)
-        datasets[0].data.push(this.$store.state.jobs.list.filter(job => job.hostUrl === host.url).length)
-      })
-        return {datasets, labels}
+        datasets[0].data.push(this.jobs.filter(job => job.hostUrl === host.url).length)
+        datasets[0].backgroundColor.push("rgb(" + Math.random()*255 + "," + Math.random()*255 + "," + Math.random()*255 + ")")
+      }
+      return {datasets, labels}
     }
   },
   mounted() {

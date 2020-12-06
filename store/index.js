@@ -17,8 +17,10 @@ export const actions = {
       commit('loadSettings', settings)
 
     let hosts = JSON.parse(localStorage.getItem('hosts'))
-    if (!!hosts)
-      hosts.forEach(host => dispatch('hosts/loadHost', host))
+    if (!!hosts) {
+      for (let host of hosts)
+        dispatch('hosts/loadHost', host)
+    }
   },
   changeSetting({ dispatch, commit }, {key, value}) {
     commit('changeSetting', {key, value})

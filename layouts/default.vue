@@ -51,6 +51,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title v-text="title" />
     </v-app-bar>
+
     <v-main>
       <v-container>
         <nuxt />
@@ -62,7 +63,7 @@
       <v-spacer></v-spacer>
       <v-switch v-model="$vuetify.theme.dark">
         <template v-slot:label>
-          <v-img width="25px" src="https://www.pngkit.com/png/full/223-2230816_dark-mode-for-safari-on-the-mac-app.png"></v-img>
+          <v-img width="25px" alt="Dark Mode" src="https://www.pngkit.com/png/full/223-2230816_dark-mode-for-safari-on-the-mac-app.png"></v-img>
         </template>
       </v-switch>
     </v-footer>
@@ -96,8 +97,8 @@ export default {
       window.open(url, '_blank')
     }
   },
-  created() {
-    this.$store.dispatch('init')
+  async created() {
+    await this.$store.dispatch('init')
   }
 }
 </script>
