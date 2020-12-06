@@ -3,7 +3,7 @@ import { Doughnut, mixins } from 'vue-chartjs'
 const { reactiveProp } = mixins
 
 export default {
-  name: "DonutChartWidget",
+  name: "DonutChart",
   extends: Doughnut,
   mixins: [reactiveProp],
   props: ['options'],

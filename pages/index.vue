@@ -26,7 +26,7 @@
       </v-row>
       <v-row>
         <v-col cols="12" md="12">
-          <DonutChartWidget :chartData="chartData"></DonutChartWidget>
+          <ChartWidget :data="chartData" chart-type="DonutChart"></ChartWidget>
         </v-col>
       </v-row>
     </v-col>
@@ -38,10 +38,12 @@ import DashboardCard from "@/components/Cards/DashboardCard";
 import AddHostDialog from "@/components/AddHostDialog";
 import HostCard from "@/components/Cards/HostCard";
 import NumberWidget from "@/components/Analytics/NumberWidget";
-import DonutChartWidget from "@/components/Analytics/DonutChartWidget";
+import DonutChartWidget from "@/components/Analytics/DonutChart";
+import ChartWidget from "@/components/Analytics/ChartWidget";
 
 export default {
   components: {
+    ChartWidget,
     DonutChartWidget,
     NumberWidget,
     HostCard,
