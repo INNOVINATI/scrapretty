@@ -1,5 +1,8 @@
 # scrapretty
-A pretty dashboard application for Scrapyd built with NuxtJS & Vuetify
+![GitHub](https://img.shields.io/github/license/innovinati/scrapretty)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/innovinati/scrapretty)
+
+A pretty dashboard application for monitoring Scrapyd instances built with NuxtJS & Vuetify
 
 ## Motivation
 A common problem for Scrapy users is the lack of a built-in admin/monitoring UI.
