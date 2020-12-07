@@ -1,24 +1,27 @@
 export const state = () => {
   return {
     list: [],
-    connected: null
+    connected: null,
+    loading: false
   }
 }
 
 export const actions = {
-  addHost({ state, dispatch }, { url, description }) {
+  addHost({ state, dispatch, commit }, { url, description }) {
+    commit('setLoading', true)
     dispatch('loadHost', { url, description })
       .then(() => localStorage.setItem('hosts', JSON.stringify(state.list)))
   },
   loadHost({ rootState, dispatch, commit }, { url, description }) {
-    return this.$axios.$get(url + '/daemonstatus.json')
+    return this.$axios.$get(url + '/daemonstatus.json', {timeout: 3000})
       .then((connection) => {
+        commit('setLoading', false)
         let host = {url, description, ...connection}
         commit('addHost', host)
         dispatch('projects/loadProjects', host, { root: true })
       })
       .catch(err => {
-        console.log(err)
+        commit('setLoading', false)
         const name = url.split('//')[1].split(':')[0]
         commit('addHost', {url, description, node_name: name, status: 'error'})
       })
@@ -52,8 +55,8 @@ export const mutations = {
     else
       state.list = []
   },
-  updateList(state, list) {
-    state.list = list
+  setLoading(state, value) {
+    state.loading = value
   }
 }
 

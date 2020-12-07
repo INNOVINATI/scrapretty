@@ -2,7 +2,7 @@
   <v-row>
     <v-col cols="12" md="8" sm="12">
       <v-data-table
-        class="elevation-2"
+        class="elevation-1"
         show-group-by
         :items="jobs"
         item-key="id"
@@ -47,7 +47,7 @@
         </template>
       </v-data-table>
     </v-col>
-    <v-col cols="12" lg="4" md="4" sm="4" xs="12" style="border-left: 1px solid grey">
+    <v-col cols="12" lg="4" md="4" sm="4" xs="12">
       <v-row>
         <v-col
           v-for="(stat, i) in stats"

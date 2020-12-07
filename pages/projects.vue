@@ -26,7 +26,7 @@
         </v-col>
       </v-row>
     </v-col>
-    <v-col cols="12" lg="4" md="4" sm="4" xs="12" style="border-left: 1px solid grey">
+    <v-col cols="12" lg="4" md="4" sm="4" xs="12">
       <v-row>
         <v-col
           v-for="(stat, i) in stats"
