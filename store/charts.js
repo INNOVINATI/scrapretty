@@ -1,21 +1,5 @@
 export const getters = {
-  hostChartData: (state, getters, rootState, rootGetters) =>   {
-    let datasets = [
-      {label: 'Jobs', data: [], backgroundColor: []},
-      {label: 'Projects', data: [], backgroundColor: []},
-    ]
-    let labels = []
-    let hosts = rootState.hosts.list
-    for (let host of hosts) {
-      labels.push(host.node_name)
-      const color = `rgb(${Math.random() * 255},${Math.random() * 255},${Math.random() * 255})`
-      datasets[1].data.push(rootState.projects.list.filter(project => project.hostUrl === host.url).length)
-      datasets[1].backgroundColor.push(color)
-      datasets[0].data.push(rootState.jobs.list.filter(job => job.hostUrl === host.url).length)
-      datasets[0].backgroundColor.push(color)
-    }
-    return {datasets, labels}
-  },
+
   projectChartData: (state, getters, rootState) => {
     let datasets = [
       {label: 'Jobs', data: [], backgroundColor: []},
@@ -43,7 +27,7 @@ export const getters = {
           label: function(tooltipItem, data) {
             var label = data.datasets[tooltipItem.datasetIndex].label || '';
             if (label) {
-              label += `: ${data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]}`;
+              label += ` (${tooltipItem.label}): ${data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]}`;
             }
             return label;
           }

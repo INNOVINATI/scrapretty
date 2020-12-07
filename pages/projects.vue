@@ -82,7 +82,7 @@ name: "projects",
       return [
         {key: 'Projects', value: this.projects.length},
         {key: 'Jobs', value: this.jobs.length},
-        {key: 'Avg. job duration', value: this.avgJobDuration, suffix: 's'}
+        {key: 'Avg. job duration', value: Number(this.avgJobDuration), suffix: 's'}
       ]
     },
 

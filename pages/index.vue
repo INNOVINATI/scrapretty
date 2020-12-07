@@ -31,7 +31,7 @@
       <v-row>
         <v-col>
           <ChartWidget
-            :data="$store.getters['charts/hostChartData']"
+            :data="chartData"
             :options="$store.getters['charts/chartOptions']"
             chart-type="DonutChart"
             v-if="jobs.length"
@@ -76,7 +76,24 @@ export default {
         {key: 'Projects', value: this.projects.length},
         {key: 'Jobs', value: this.jobs.length},
       ]
-    }
+    },
+    chartData() {
+      let datasets = [
+        {label: 'Jobs', data: [], backgroundColor: []},
+        {label: 'Projects', data: [], backgroundColor: []},
+      ]
+      let labels = []
+      let hosts = this.$store.state.hosts.list
+      for (let host of hosts) {
+        labels.push(host.node_name)
+        const color = `rgb(${Math.random() * 255},${Math.random() * 255},${Math.random() * 255})`
+        datasets[1].data.push(this.$store.state.projects.list.filter(project => project.hostUrl === host.url).length)
+        datasets[1].backgroundColor.push(color)
+        datasets[0].data.push(this.$store.state.jobs.list.filter(job => job.hostUrl === host.url).length)
+        datasets[0].backgroundColor.push(color)
+      }
+      return {datasets, labels}
+    },
   },
   mounted() {
     this.$store.commit('hosts/disconnect')
