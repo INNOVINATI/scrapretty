@@ -2,10 +2,10 @@
   <v-row>
     <v-col cols="12" lg="8" md="8" sm="8" xs="12">
       <v-row justify="center" align="center">
-        <v-col cols="12" lg="6" md="12" v-for="(project, i) in projects" v-bind:key="i" >
+        <v-col cols="12" lg="6" md="12" sm="12" v-for="(project, i) in projects" v-bind:key="i" >
           <ProjectCard :project="project"></ProjectCard>
         </v-col>
-        <v-col cols="12" md="6" sm="12" v-if="$store.state.settings.showUploadNotice">
+        <v-col cols="12" lg="6" md="12" sm="12" v-if="$store.state.settings.showUploadNotice">
           <DashboardCard
             :contents="['Upload a project/version using <code>scrapyd-deploy</code>']"
             :actions="[{text: 'Read more', icon: 'mdi-info', callback: readMore}]"

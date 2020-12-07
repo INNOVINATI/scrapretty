@@ -42,7 +42,17 @@ export default {
     },
     details() {
       let details = []
-      this.project.spiders.forEach(spider => details.push({text: spider, icon: 'mdi-spider'}))
+      this.project.spiders.forEach(spider => details.push({
+        text: spider,
+        icon: 'mdi-spider',
+        title: 'Click to schedule',
+        callback: params => this.$store.dispatch(
+          'projects/scheduleOne',
+          {project: this.project, spider, params},
+          { root: true }
+        ),
+        modal: true
+      }))
       return details
     }
   },

@@ -29,7 +29,9 @@ export const actions = {
 
 export const mutations = {
   loadJobs(state, jobs) {
-    jobs.forEach(job => state.list.push(job))
+    for (let job of jobs) {
+      state.list.push(job)
+    }
   },
   flush(state, host) {
     if (host)

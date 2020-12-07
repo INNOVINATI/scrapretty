@@ -33,21 +33,47 @@
     <v-expand-transition>
       <div v-show="show">
         <v-divider></v-divider>
-        <v-card-text align="center">
-          <v-chip
+        <v-card-text>
+          <div
             v-for="(item, i) in details"
             v-bind:key="i"
-            class="ma-1"
           >
-            <v-icon
-              v-if="item.hasOwnProperty('icon')"
-              left
-              small
+            <ScheduleModal
+              :callback="item.callback"
+              v-if="item.hasOwnProperty('modal') && item.modal"
+              v-slot="slotProps"
             >
-              {{ item.icon }}
-            </v-icon>
-            <span>{{ item.text }}</span>
-          </v-chip>
+              <v-chip
+                class="ma-1"
+                :title="item.title || ''"
+                v-bind="slotProps.attrs"
+                v-on="slotProps.on"
+              >
+                <v-icon
+                  v-if="item.hasOwnProperty('icon')"
+                  left
+                  small
+                >
+                  {{ item.icon }}
+                </v-icon>
+                <span>{{ item.text }}</span>
+              </v-chip>
+            </ScheduleModal>
+            <v-chip
+              v-else
+              class="ma-1"
+              :title="item.title || ''"
+            >
+              <v-icon
+                v-if="item.hasOwnProperty('icon')"
+                left
+                small
+              >
+                {{ item.icon }}
+              </v-icon>
+              <span>{{ item.text }}</span>
+            </v-chip>
+          </div>
         </v-card-text>
       </div>
     </v-expand-transition>
@@ -55,8 +81,11 @@
 </template>
 
 <script>
+import ScheduleModal from "@/components/Cards/ScheduleModal";
+
 export default {
   name: "DashboardCard",
+  components: {ScheduleModal},
   props: {
     contents: Array,
     details: {

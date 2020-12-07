@@ -33,9 +33,16 @@ export const actions = {
   scheduleAll({dispatch}, project) {
     project.spiders.forEach(spider => dispatch('scheduleOne', { project, spider}))
   },
-  scheduleOne({ dispatch, commit }, {project, spider}) {
-    this.$axios.$post(project.hostUrl + '/schedule.json?project=' + project.name + '&spider=' + spider)
-      .then(res => commit('jobs/loadJob', {id: res.jobid, project: project.name, spider: spider, status: 'pending'}, { root: true }))
+  scheduleOne({ dispatch, commit, rootState }, payload) {
+    let url = payload.project.hostUrl + '/schedule.json?project=' + payload.project.name + '&spider=' + payload.spider
+    if (payload.hasOwnProperty('params')) {
+      for (let param of payload.params) {
+        if (param.key && param.value)
+          url += `&${param.key}=${param.value}`
+      }
+    }
+    this.$axios.$post(url)
+      .then(res => commit('jobs/loadJobs', rootState.hosts.connected, { root: true }))
       .catch(err => console.log(err))
   }
 }
