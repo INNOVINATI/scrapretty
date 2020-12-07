@@ -24,6 +24,12 @@ export const actions = {
       .then(res => commit('delProject', project))
       // Todo: catch error
   },
+  delFromHost({state, dispatch, commit}, host) {
+    dispatch("jobs/flush", host, { root: true })
+    for (let project of state.list.filter(p => p.hostUrl === host.url)) {
+      commit('delProject', project)
+    }
+  },
   scheduleAll({dispatch}, project) {
     project.spiders.forEach(spider => dispatch('scheduleOne', { project, spider}))
   },

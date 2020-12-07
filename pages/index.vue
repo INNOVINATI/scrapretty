@@ -1,17 +1,21 @@
 <template>
   <v-row>
-    <v-col cols="12" md="">
+    <v-col cols="12" lg="8" md="8" sm="8" xs="12">
       <v-row justify="center" align="center">
-        <v-col cols="12" md="6" sm="12" v-for="(host, i) in hosts" v-bind:key="i" >
-          <HostCard :host="host"/>
+        <v-col
+          v-for="(host, i) in hosts"
+          v-bind:key="i"
+          cols="12" lg="6" md="12"
+        >
+          <HostCard class="mx-auto" :host="host"/>
         </v-col>
-        <v-col cols="6">
+        <v-col>
           <AddHostDialog/>
         </v-col>
       </v-row>
     </v-col>
-    <v-divider vertical></v-divider>
-    <v-col cols="4">
+
+    <v-col cols="12" lg="4" md="4" sm="4" xs="12" style="border-left: 1px solid grey">
       <v-row>
         <v-col
           v-for="(stat, i) in stats"
@@ -25,8 +29,14 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" md="12">
-          <ChartWidget :data="chartData" chart-type="DonutChart"></ChartWidget>
+        <v-col>
+          <ChartWidget
+            :data="$store.getters['charts/hostChartData']"
+            :options="$store.getters['charts/chartOptions']"
+            chart-type="DonutChart"
+            v-if="jobs.length"
+            class="mx-auto"
+          ></ChartWidget>
         </v-col>
       </v-row>
     </v-col>
@@ -38,13 +48,13 @@ import DashboardCard from "@/components/Cards/DashboardCard";
 import AddHostDialog from "@/components/AddHostDialog";
 import HostCard from "@/components/Cards/HostCard";
 import NumberWidget from "@/components/Analytics/NumberWidget";
-import DonutChartWidget from "@/components/Analytics/DonutChart";
-import ChartWidget from "@/components/Analytics/ChartWidget";
+import ChartWidget from "@/components/Analytics/Charts/ChartWidget";
+import Widget from "@/components/Analytics/Widget";
 
 export default {
   components: {
+    Widget,
     ChartWidget,
-    DonutChartWidget,
     NumberWidget,
     HostCard,
     AddHostDialog,
@@ -66,17 +76,6 @@ export default {
         {key: 'Projects', value: this.projects.length},
         {key: 'Jobs', value: this.jobs.length},
       ]
-    },
-    chartData() {
-      let colors = []
-      let datasets = [{label: 'Jobs per Host', data: [], backgroundColor: []}]
-      let labels = []
-      for (let host of this.hosts) {
-        labels.push(host.node_name)
-        datasets[0].data.push(this.jobs.filter(job => job.hostUrl === host.url).length)
-        datasets[0].backgroundColor.push("rgb(" + Math.random()*255 + "," + Math.random()*255 + "," + Math.random()*255 + ")")
-      }
-      return {datasets, labels}
     }
   },
   mounted() {

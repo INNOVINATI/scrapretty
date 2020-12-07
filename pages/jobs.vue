@@ -3,7 +3,6 @@
     <v-col cols="12" md="8" sm="12">
       <v-data-table
         class="elevation-2"
-        dense
         show-group-by
         :items="jobs"
         item-key="id"
@@ -27,6 +26,25 @@
             </v-btn>
           </v-layout>
         </template>
+        <template v-slot:item.status="{ item }">
+          <v-chip
+            :color="item.status === 'finished' ? 'green' : item.status === 'running' ? 'primary' : 'grey'"
+            dark
+            small
+          >
+            {{ item.status }}
+          </v-chip>
+        </template>
+        <template v-slot:item.projectName="{ item }">
+          <v-chip small>
+            {{ item.projectName }}
+          </v-chip>
+        </template>
+        <template v-slot:item.spider="{ item }">
+          <v-chip small>
+            {{ item.spider }}
+          </v-chip>
+        </template>
       </v-data-table>
     </v-col>
     <v-divider vertical></v-divider>
@@ -42,7 +60,6 @@ export default {
   data() {
     return {
       search: '',
-      loading: false,
     }
   },
   computed: {

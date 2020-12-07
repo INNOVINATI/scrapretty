@@ -23,8 +23,9 @@ export const actions = {
         commit('addHost', {url, description, node_name: name, status: 'error'})
       })
   },
-  delHost({ state, commit }, host) {
+  delHost({ state, commit, dispatch }, host) {
     commit('delHost', host)
+    dispatch("projects/delFromHost", host, { root: true})
     localStorage.setItem('hosts', JSON.stringify(state.list))
   },
   connect({ commit }, host) {
@@ -47,7 +48,7 @@ export const mutations = {
   },
   delHost(state, host) {
     if (state.list.length > 1)
-      state.list = state.list.splice(state.list.indexOf(host), 1)
+      state.list.splice(state.list.indexOf(host), 1)
     else
       state.list = []
   },

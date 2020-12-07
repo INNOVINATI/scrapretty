@@ -30,7 +30,7 @@ export default {
           this.$store.dispatch('hosts/connect', this.host)
             .then(() => this.$router.push('/projects'))
         }})
-      actions.push({text: 'Delete', callback: host => this.$store.dispatch('hosts/delHost', host)})
+      actions.push({text: 'Delete', callback: () => this.$store.dispatch('hosts/delHost', this.host)})
       return actions
     },
     details() {

@@ -13,7 +13,7 @@
         v-bind:key="i"
         color="orange lighten-2"
         text
-        @click="action.callback"
+        @click="action.callback()"
       >
         {{ action.text }}
       </v-btn>

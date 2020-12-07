@@ -22,6 +22,9 @@ export const actions = {
         .catch(err => console.log(err))
     })
   },
+  flush({ commit }, host) {
+    commit('flush', host)
+  }
 }
 
 export const mutations = {

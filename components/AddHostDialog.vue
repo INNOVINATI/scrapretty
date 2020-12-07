@@ -22,29 +22,29 @@
         </v-card-title>
         <v-card-text>
           <v-container>
-            <v-row>
-              <v-col cols="12" sm="8" md="10">
-                <v-text-field
-                  v-model="form.url"
-                  label="URL"
-                  hint="Please provide the full URL, i.e. 'https://srv.example.com'"
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="4" md="2">
-                <v-text-field
-                  v-model="form.port"
-                  label="Port"
-                  type="number"
-                  value="6800"
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" md="12">
-                <v-text-field
-                  v-model="form.description"
-                  label="Description"
-                ></v-text-field>
-              </v-col>
-            </v-row>
+              <v-row>
+                <v-col cols="12" sm="8" md="10">
+                  <v-text-field
+                    v-model="form.url"
+                    label="URL"
+                    :rules="urlRules"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="4" md="2">
+                  <v-text-field
+                    v-model="form.port"
+                    label="Port"
+                    type="number"
+                    value="6800"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" md="12">
+                  <v-text-field
+                    v-model="form.description"
+                    label="Description"
+                  ></v-text-field>
+                </v-col>
+              </v-row>
           </v-container>
         </v-card-text>
         <v-card-actions>
@@ -78,13 +78,21 @@ export default {
       url: '',
       port: 6800,
       description: 'Scrapyd server'
-    }
+    },
+    urlRules: [
+      v => !!v || 'URL is required',
+      v => (!!v && v.startsWith('http')) || 'URL must start with "http(s)://"'
+    ],
   }),
   methods: {
     submit() {
       const url = this.form.url.endsWith('/') ? this.form.url.substring(0, this.form.url.length - 1) + ':6800' : this.form.url + ':6800'
       this.$store.dispatch('hosts/addHost', {url, description: this.form.description})
-        .then(() => this.dialog = false)
+        .then(() => {
+          this.form.url = ''
+          this.form.description = 'Scrapyd server'
+          this.dialog = false
+        })
     }
   }
 }

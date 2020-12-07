@@ -10,6 +10,7 @@ export const state = () => {
   }
 }
 
+
 export const actions = {
   init({ dispatch, commit }) {
     let settings = JSON.parse(localStorage.getItem('settings'))
