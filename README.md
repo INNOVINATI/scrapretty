@@ -1,4 +1,5 @@
 # scrapretty
+![Travis (.com)](https://img.shields.io/travis/com/innovinati/scrapretty)
 ![GitHub](https://img.shields.io/github/license/innovinati/scrapretty)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/innovinati/scrapretty)
 
