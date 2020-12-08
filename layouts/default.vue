@@ -98,7 +98,7 @@
     </v-main>
 
     <v-footer app fixed>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
+      <span>© {{ new Date().getFullYear() }} <a class="secondary--text" href="https://innovinati.com" target="_blank">INNOVINATI</a></span>
       <v-spacer></v-spacer>
       <v-switch v-model="$vuetify.theme.dark">
         <template v-slot:label>
@@ -148,3 +148,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  a {
+    text-decoration: none;
+  }
+</style>

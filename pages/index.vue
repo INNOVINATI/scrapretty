@@ -14,7 +14,7 @@
           scra<i>pretty</i>
         </h1>
         <h2 class="subheading" style="font-family: monospace">
-          scrapyd + Vuetify = 💅✨
+          scrapyd + Nuxt + Vuetify = 💅✨
         </h2>
         <div class="mt-5">
           <v-btn class="black" outlined text large to="/dashboard">Start app</v-btn>
@@ -73,7 +73,10 @@
       </v-col>
     </v-row>
     <v-footer>
-      <span>© 2020 INNOVINATI</span>
+      <span>© {{ new Date().getFullYear() }} <a class="secondary--text" href="https://innovinati.com" target="_blank">INNOVINATI</a></span>
+      <v-spacer></v-spacer>
+      <a class="mx-2 secondary--text">Imprint</a>
+      <a class="mx-2 secondary--text">Privacy</a>
     </v-footer>
   </div>
 
@@ -100,7 +103,7 @@
           title: 'Simple & serverless',
           text: 'Build and deploy using any static site hosting service.<br>Nothing is stored on our servers.',
           links: [
-            {title: 'GitHub Pages', url: 'https://pages.github.com/', logo: 'https://miro.medium.com/max/720/1*osyaA6QwQra6llfoFYAOkw.png'},
+            {title: 'GitHub Pages', url: 'https://pages.github.com/', logo: 'https://pngimg.com/uploads/github/github_PNG15.png'},
             {title: 'Netlify', url: 'https://www.netlify.com/', logo: 'https://flaviocopes.com/netlify/netlify-logo.png'}
           ]
         },
@@ -142,6 +145,11 @@
 </script>
 
 <style scoped>
+
+a {
+  text-decoration: none;
+}
+
 #data-v-2a183b29 > div {
   height: 100% !important;
 }
