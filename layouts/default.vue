@@ -98,7 +98,7 @@
     </v-main>
 
     <v-footer app fixed>
-      <span>© {{ new Date().getFullYear() }} <a class="secondary--text" href="https://innovinati.com" target="_blank">INNOVINATI</a></span>
+      <span>© MIT License</span>
       <v-spacer></v-spacer>
       <v-switch v-model="$vuetify.theme.dark">
         <template v-slot:label>

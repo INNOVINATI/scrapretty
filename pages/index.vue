@@ -73,7 +73,7 @@
       </v-col>
     </v-row>
     <v-footer>
-      <span>© {{ new Date().getFullYear() }} <a class="secondary--text" href="https://innovinati.com" target="_blank">INNOVINATI</a></span>
+      <span>© MIT License</span>
       <v-spacer></v-spacer>
       <a class="mx-2 secondary--text">Imprint</a>
       <a class="mx-2 secondary--text">Privacy</a>
