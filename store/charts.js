@@ -27,7 +27,7 @@ export const getters = {
           label: function(tooltipItem, data) {
             var label = data.datasets[tooltipItem.datasetIndex].label || '';
             if (label) {
-              label += ` (${tooltipItem.label}): ${data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]}`;
+              label += `: ${data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]}`;
             }
             return label;
           }
