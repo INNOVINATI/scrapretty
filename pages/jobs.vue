@@ -52,6 +52,7 @@
         <v-col
           v-for="(stat, i) in stats"
           :key="i"
+          cols="12" lg="4" md="6" sm="12"
         >
           <NumberWidget
             class="mx-auto"

@@ -5,7 +5,8 @@
           <v-list-item
             router
             exact
-            to="/"
+            :active-class="$vuetify.theme.dark ? 'primary' : 'primary--text'"
+            to="/dashboard"
           >
             <v-list-item-action>
               <v-icon>mdi-apps</v-icon>
@@ -16,13 +17,13 @@
           </v-list-item>
           <div v-if="$store.state.hosts.connected">
             <v-divider></v-divider>
-            <v-subheader>{{ $store.state.hosts.connected.node_name }}</v-subheader>
             <v-list-item
               router
               exact
               v-for="(page, i) in pages"
               :key="i"
               :to="page.path"
+              :active-class="$vuetify.theme.dark ? 'primary' : 'primary--text'"
             >
               <v-list-item-action>
                 <v-icon>{{ page.icon }}</v-icon>
@@ -35,7 +36,7 @@
         </v-list>
 
         <template v-slot:append>
-          <v-subheader>Useful links</v-subheader>
+          <span class="px-3">Resources</span>
           <v-list dense>
             <v-list-item
               v-for="(item, i) in supportLinks"
@@ -47,9 +48,22 @@
           </v-list>
         </template>
     </v-navigation-drawer>
+
     <v-app-bar fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title v-text="title" />
+      <v-spacer></v-spacer>
+      <v-chip
+        color="primary"
+        dark
+        v-if="$store.state.hosts.connected"
+        close
+        @click:close="$router.push('/dashboard')"
+      >
+        <v-icon small>mdi-server-network</v-icon>
+        <span class="mx-1">{{ $store.state.hosts.connected.node_name }}</span>
+      </v-chip>
+      <v-btn icon to="/goodbye"><v-icon>mdi-power</v-icon></v-btn>
     </v-app-bar>
 
     <v-main>

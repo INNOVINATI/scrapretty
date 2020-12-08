@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col cols="12" lg="8" md="8" sm="8" xs="12">
-      <v-row justify="center" align="center">
+      <v-row justify="center">
         <v-col cols="12" lg="6" md="12" sm="12" v-for="(project, i) in projects" v-bind:key="i" >
           <ProjectCard :project="project"></ProjectCard>
         </v-col>
@@ -31,6 +31,7 @@
         <v-col
           v-for="(stat, i) in stats"
           :key="i"
+          cols="12" lg="6" md="6" sm="12"
         >
           <NumberWidget
             class="mx-auto"
@@ -70,6 +71,9 @@ name: "projects",
     projects() {
       return this.$store.state.projects.list.filter(p => p.hostUrl === this.host.url)
     },
+    spiders() {
+      return this.projects.reduce((acc, next) => acc + next.spiders.length, 0)
+    },
     jobs() {
       return this.$store.state.jobs.list.filter(j => j.hostUrl === this.host.url)
     },
@@ -82,7 +86,8 @@ name: "projects",
       return [
         {key: 'Projects', value: this.projects.length},
         {key: 'Jobs', value: this.jobs.length},
-        {key: 'Avg. job duration', value: Number(this.avgJobDuration), suffix: 's'}
+        {key: 'Spiders', value: this.spiders},
+        {key: 'Avg. job duration', value: Number(this.avgJobDuration) || 0, suffix: 's'}
       ]
     },
 

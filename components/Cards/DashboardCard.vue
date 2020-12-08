@@ -1,12 +1,13 @@
 <template>
   <v-card
-    class="mx-auto"
+    class="mx-auto d-flex flex-column"
     min-width="300"
+    min-height="200"
   >
     <slot name="header"></slot>
 
     <v-card-subtitle v-for="(item, i) in contents" v-bind:key="i" v-html="item"></v-card-subtitle>
-
+    <v-spacer></v-spacer>
     <v-card-actions>
       <v-btn
         v-for="(action, i) in actions"
@@ -37,6 +38,7 @@
           <div
             v-for="(item, i) in details"
             v-bind:key="i"
+            class="d-inline-flex"
           >
             <ScheduleModal
               :callback="item.callback"
