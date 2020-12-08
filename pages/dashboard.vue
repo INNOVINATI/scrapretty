@@ -46,6 +46,7 @@
         </v-col>
       </v-row>
     </v-col>
+    <FirstUsageInfo></FirstUsageInfo>
   </v-row>
 </template>
 
@@ -56,10 +57,12 @@
   import NumberWidget from "@/components/Analytics/NumberWidget";
   import ChartWidget from "@/components/Analytics/Charts/ChartWidget";
   import Widget from "@/components/Analytics/Widget";
+  import FirstUsageInfo from "@/components/FirstUsageInfo";
 
   export default {
     name: 'dashboard',
     components: {
+      FirstUsageInfo,
       Widget,
       ChartWidget,
       NumberWidget,
