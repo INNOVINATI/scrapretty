@@ -63,7 +63,32 @@
         <v-icon small>mdi-server-network</v-icon>
         <span class="mx-1">{{ $store.state.hosts.connected.node_name }}</span>
       </v-chip>
-      <v-btn icon to="/goodbye"><v-icon>mdi-power</v-icon></v-btn>
+      <v-menu
+        bottom
+        left
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            dark
+            icon
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item
+            v-for="(item, i) in actions"
+            :key="i"
+            @click="item.callback()"
+          >
+            <v-list-item-avatar><v-icon>{{ item.icon }}</v-icon></v-list-item-avatar>
+            <v-list-item-title>{{ item.text }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-app-bar>
 
     <v-main>
@@ -98,6 +123,13 @@ export default {
         {title: 'Source (GitHub)', url: 'https://github.com/innovinati/scrapretty'},
         {title: 'Bug reports', url: 'https://github.com/innovinati/scrapretty/issues'},
         {title: 'scrapyd-deploy', url: 'https://github.com/scrapy/scrapyd-client#scrapyd-deploy'}
+      ],
+      actions: [
+        {text: 'Reload', icon: 'mdi-reload', callback: () => location.reload()},
+        {text: 'Clear local storage', icon: 'mdi-delete', callback: () => {
+            localStorage.clear()
+            location.reload()
+          }}
       ]
     }
   },
